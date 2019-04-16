@@ -3,6 +3,11 @@
   "version": "0.0.1",
   "description": "",
   "author": "Jeremy Bolding <cyberchefjay@gmail.com> (https://thecodechef.github.io)",
-  "dependencies": {},
-  "devDependencies": {}
+  "dependencies": {
+    "node-sass": "latest"
+  },
+  "devDependencies": {
+    "rollup": "latest",
+    "rollup-plugin-sass": "latest"
+  }
 }
