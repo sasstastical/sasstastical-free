@@ -1,0 +1,37 @@
+version: 2.1
+
+executors:
+  node:
+    docker:
+      - image: circleci/node:latest
+  working_directory: '~/sasstastical-free'
+
+commands:
+  install_packages:
+    description: 'Install Packages'
+    steps:
+      - restore_cache:
+          keys:
+            - 'v2-yarn-{{ checksum "yarn.lock" }}'
+      - run: npm install -g yarn
+      - run: yarn
+      - save_cache:
+          key: v2-yarn-{{ checksum "yarn.lock" }}
+          when: on_success
+          paths:
+            - ~/thecodechef.github.io/node_modules
+jobs:
+  local_test:
+    executor: node
+    steps:
+      - checkout
+      - install_packages
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - local_test:
+          filters:
+            branches:
+              only: master
