@@ -21,7 +21,7 @@ commands:
           paths:
             - ~/thecodechef.github.io/node_modules
 jobs:
-  local_test:
+  install:
     executor: node
     steps:
       - checkout
@@ -29,9 +29,9 @@ jobs:
 
 workflows:
   version: 2
-  test:
+  install_with_yarn:
     jobs:
-      - local_test:
+      - install:
           filters:
             branches:
               only: master
