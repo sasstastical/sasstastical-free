@@ -20,18 +20,29 @@ commands:
           when: on_success
           paths:
             - ~/thecodechef.github.io/node_modules
+  run_gulp:
+    description: 'Run Gulp'
+    steps:
+      - run: gulp
 jobs:
   install:
     executor: node
     steps:
       - checkout
       - install_packages
+  build:
+    executor: node
+    steps:
+      - run_gulp
 
 workflows:
   version: 2
-  install_with_yarn:
+  build_with_gulp:
     jobs:
-      - install:
+      - install
+      - build:
+          requires:
+            - install
           filters:
             branches:
               only: master
